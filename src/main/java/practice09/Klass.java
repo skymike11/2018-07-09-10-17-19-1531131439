@@ -1,5 +1,6 @@
 package practice09;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Klass {
@@ -7,7 +8,7 @@ public class Klass {
 
     private Student leader;
 
-    private Set<Integer> classMember;
+    private Set<Integer> classMember = new HashSet<>();
 
     public Klass(int number) {
         this.number = number;
@@ -25,7 +26,7 @@ public class Klass {
         if (classMember.contains(student.getId())) {
             this.leader = student;
         } else {
-            System.out.println("It is not one of us.");
+            System.out.print("It is not one of us.\n");
         }
     }
 
