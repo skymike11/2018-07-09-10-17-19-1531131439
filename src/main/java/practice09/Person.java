@@ -40,6 +40,8 @@ public class Person {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
         Person target = (Person) obj;
         return this.id == target.id;
     }
