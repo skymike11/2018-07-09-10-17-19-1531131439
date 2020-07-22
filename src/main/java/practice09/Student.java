@@ -26,7 +26,6 @@ public class Student extends Person {
     @Override
     public String introduce() {
         String stuIdentity = format("I am at %s.", klass.getDisplayName());
-        ;
         if (klass.getLeader() != null && name.equals(klass.getLeader().getName())) {
             stuIdentity = format("I am Leader of %s.", klass.getDisplayName());
         }
