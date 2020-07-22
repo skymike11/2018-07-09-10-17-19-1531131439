@@ -37,6 +37,6 @@ public class Person {
     @Override
     public boolean equals(Object obj) {
         Person target = (Person) obj;
-        return (this.id == target.id) && (this.age == target.age) && (this.name == target.name);
+        return this.id == target.id;
     }
 }
