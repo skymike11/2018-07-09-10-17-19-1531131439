@@ -21,21 +21,27 @@ public class Teacher extends Person {
     }
 
     public String getTeachingClassDisplay() {
-        return classes.stream().map(n -> String.valueOf(n.getNumber())).collect(Collectors.joining(" ,"));
+        return classes.stream().map(n -> String.valueOf(n.getNumber())).collect(Collectors.joining(", "));
+    }
+
+    public String introduceWith(Student student) {
+        String result = " I am a Teacher. " + (isTeaching(student) ?
+                String.format("I teach %s.", student.getName()) : String.format("I don't teach %s.", student.getName()));
+        return super.introduce() + result;
     }
 
     @Override
     public String introduce() {
-        return String.format("%s I am a Teacher. I teach %s.", super.introduce(), classes.size() <=0 ? "No Class" : getTeachingClassDisplay());
+        return String.format("%s I am a Teacher. I teach %s.", super.introduce(), classes.size() <= 0 ? "No Class" : "Class " + getTeachingClassDisplay());
     }
 
     public List<Klass> getClasses() {
         return classes;
     }
 
-    public boolean isTeaching (Student student) {
+    public boolean isTeaching(Student student) {
         for (Klass klass : classes) {
-            if (klass.isIn(String.valueOf(student.getId()))) {
+            if (klass.isIn(student.getId())) {
                 return true;
             }
         }

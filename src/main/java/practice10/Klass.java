@@ -38,7 +38,7 @@ public class Klass {
         return leader;
     }
 
-    public boolean isIn(String stuId) {
+    public boolean isIn(int stuId) {
         return classMember.contains(stuId);
     }
 }
