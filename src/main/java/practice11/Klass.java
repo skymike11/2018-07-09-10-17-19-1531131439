@@ -1,6 +1,8 @@
 package practice11;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Klass {
@@ -10,10 +12,13 @@ public class Klass {
 
     private Set<Integer> classMember = new HashSet<>();
 
-    private Teacher teacher;
+    private Obsever obsever;
+
+    private List<Obsever> obsevers;
 
     public Klass(int number) {
         this.number = number;
+        obsevers = new ArrayList<>();
     }
 
     public int getNumber() {
@@ -27,17 +32,16 @@ public class Klass {
     public void assignLeader(Student student) {
         if (classMember.contains(student.getId())) {
             this.leader = student;
-            if (teacher != null)
-                System.out.print(String.format("I am %s. I know %s become Leader of %s.\n", teacher.getName(), student.getName(), getDisplayName()));
+            notifyObsever(0, student);
         } else {
             System.out.print("It is not one of us.\n");
         }
     }
 
     public void appendMember(Student student) {
+        student.setKlass(this);
         classMember.add(student.getId());
-        if (teacher != null)
-            System.out.print(String.format("I am %s. I know %s has joined %s.\n", teacher.getName(), student.getName(), getDisplayName()));
+        notifyObsever(1, student);
     }
 
     public Student getLeader() {
@@ -48,11 +52,14 @@ public class Klass {
         return classMember.contains(stuId);
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public void addObsever(Obsever obsever) {
+        this.obsevers.add(obsever);
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void notifyObsever(int state, Student student) {
+        for (Obsever obsever : obsevers) {
+            obsever.update(state, student);
+        }
     }
+
 }

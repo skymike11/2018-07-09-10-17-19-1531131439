@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Teacher extends Person {
+public class Teacher extends Person implements Obsever  {
     private List<Klass> classes = new LinkedList<Klass>();
 
     public Teacher(int id, String name, int age) {
@@ -13,12 +13,12 @@ public class Teacher extends Person {
 
     public Teacher(int id, String name, int age, List<Klass> klass) {
         super(id, name, age);
-        this.classes = klass;
         for (int i = 0; i < klass.size(); i++) {
              Klass tempClass = klass.get(i);
-             tempClass.setTeacher(this);
+             tempClass.addObsever(this);
              klass.set(i, tempClass);
         }
+        this.classes = klass;
     }
 
     public List<Klass> getKlass() {
@@ -51,5 +51,15 @@ public class Teacher extends Person {
             }
         }
         return false;
+    }
+
+    @Override
+    public void update(int state, Student student) {
+    // 0 = assign 1 =join
+        if (state == 0) {
+            System.out.print(String.format("I am %s. I know %s become Leader of %s.\n", getName(), student.getName(), student.getKlass().getDisplayName()));
+        } else if (state ==1 ){
+            System.out.print(String.format("I am %s. I know %s has joined %s.\n", getName(), student.getName(), student.getKlass().getDisplayName()));
+        }
     }
 }
