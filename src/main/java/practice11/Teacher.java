@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static practice11.Constant.NOTIFY_MESSAGE_ASSIGN;
+import static practice11.Constant.NOTIFY_MESSAGE_JOIN;
+
 public class Teacher extends Person implements Obsever  {
     private List<Klass> classes = new LinkedList<Klass>();
 
@@ -55,10 +58,9 @@ public class Teacher extends Person implements Obsever  {
 
     @Override
     public void update(int state, Student student) {
-    // 0 = assign 1 =join
-        if (state == 0) {
+        if (state == NOTIFY_MESSAGE_ASSIGN) {
             System.out.print(String.format("I am %s. I know %s become Leader of %s.\n", getName(), student.getName(), student.getKlass().getDisplayName()));
-        } else if (state ==1 ){
+        } else if (state == NOTIFY_MESSAGE_JOIN ){
             System.out.print(String.format("I am %s. I know %s has joined %s.\n", getName(), student.getName(), student.getKlass().getDisplayName()));
         }
     }
